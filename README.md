@@ -1,11 +1,13 @@
-import { render } from 'github-buttons'
+<template>
+  <github-button href="https://github.com/ntkme">Follow @ntkme</github-button>
+</template>
 
-// export function render(anchor: HTMLAnchorElement, callback: (el: HTMLElement) => void): void;
-render(anchor, function (el) {
-  anchor.parentNode.replaceChild(el, anchor)
-})
+<script>
+import GithubButton from 'vue-github-button'
 
-// export function render(options: object, callback: (el: HTMLElement) => void): void;
-render(options, function (el) {
-  document.body.appendChild(el) 
-})
+export default {
+  components: {
+    GithubButton
+  }
+}
+</script>
