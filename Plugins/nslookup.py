@@ -2,10 +2,9 @@
 from requests import get
 
 
-def nsLookup(host):
+def nsLookup(host, port):
     result = get('http://api.hackertarget.com/dnslookup/?q=' + host).text
-    return result
+    print(result)
 
 host = 'www.skcet.ac.in'
 
-nsLookup(host)

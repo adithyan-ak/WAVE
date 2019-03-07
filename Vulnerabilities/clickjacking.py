@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 
-def ClickJacking(host,port):
+def ClickJacking(host, port):
 
     if port == 80:
           port = 'http://'
@@ -16,8 +16,10 @@ def ClickJacking(host,port):
     headers = data.info()
 
     if not "X-Frame-Options" in headers:
-          return ("Website is vulnerable")
+          print("Website is vulnerable")
 
     else:
-          return ("Website is not Vulnerable")
+          print("Website is not Vulnerable")
+
+
 

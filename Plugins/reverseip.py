@@ -2,10 +2,11 @@
 from requests import get
 
 
-def ReverseIP(host):
+def ReverseIP(host, port):
     lookup = 'https://api.hackertarget.com/reverseiplookup/?q=%s' % host
     try:
         result = get(lookup).text
-        return result
+        print(result)
     except:
         print('%s Invalid IP address' % bad)
+

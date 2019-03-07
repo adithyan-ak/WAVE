@@ -1,7 +1,7 @@
 from urllib.request import *
 
 
-def OpenRedirect(host,port):
+def OpenRedirect(host, port):
     if port == 80:
         port = 'http://'
     elif port == 443:

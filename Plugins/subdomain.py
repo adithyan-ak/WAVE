@@ -3,7 +3,7 @@ import json
 import requests
 
 
-def SubDomain(host):
+def SubDomain(host, port):
 
     url = 'https://www.virustotal.com/vtapi/v2/domain/report'
 
@@ -13,5 +13,6 @@ def SubDomain(host):
 
     subdomains = response.json()
 
-    return (subdomains['domain_siblings'])
+    for x in subdomains['domain_siblings']:
+        print(x)
 
