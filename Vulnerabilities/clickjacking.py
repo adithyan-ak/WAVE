@@ -16,10 +16,10 @@ def ClickJacking(host, port):
     headers = data.info()
 
     if not "X-Frame-Options" in headers:
-          print("Website is vulnerable")
+          print("Website is vulnerable to ClickJacking")
 
     else:
-          print("Website is not Vulnerable")
+          print("Website is not Vulnerable to ClickJacking")
 
 
 

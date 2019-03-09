@@ -13,5 +13,5 @@ def Cors(host, port):
     if 'evil.com' in response.headers:
         print("Vulnerable to Cross Origin Resource Sharing")
     else:
-        print("Not Vulnerable")
+        print("Not Vulnerable to Cross Origin Resource Sharing")
 

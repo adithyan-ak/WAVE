@@ -3,27 +3,22 @@ from Plugins.reverseip import ReverseIP
 from Plugins.subdomain import SubDomain
 from Plugins.nslookup import nsLookup
 from Plugins.cmsdetect import CMSdetect
-from Plugins.nmap_recon import Nmap_Recon
+from Plugins.nmap_recon import DefaultPort,Customrange
 from Vulnerabilities.clickjacking import ClickJacking
 from Vulnerabilities.hostheader import HostHeader
 from Vulnerabilities.cors import Cors
 from Vulnerabilities.openredirect import OpenRedirect
 def Banner():
     print('''
-    '##:::::'##::::'###::::'##::::'##:'########::'######::
-     ##:'##: ##:::'## ##::: ##:::: ##: ##.....::'##... ##:
-     ##: ##: ##::'##:. ##:: ##:::: ##: ##::::::: ##:::..::
-     ##: ##: ##:'##:::. ##: ##:::: ##: ######:::. ######::
-     ##: ##: ##: #########:. ##:: ##:: ##...:::::..... ##: 
-     ##: ##: ##: ##.... ##::. ## ##::: ##:::::::'##::: ##:
-    . ###. ###:: ##:::: ##:::. ###:::: ########:. ######::
-    :...::...:::..:::::..:::::...:::::........:::......::: \n''')
+dP   dP   dP  .d888888  dP     dP  88888888b 
+88   88   88 d8'    88  88     88  88        
+88  .8P  .8P 88aaaaa88a 88    .8P a88aaaa    
+88  d8'  d8' 88     88  88    d8'  88        
+88.d8P8.d8P  88     88  88  .d8P   88        
+8888' Y88'   88     88  888888'    88888888P \n''')
 
-Banner()
-
-host = input("Enter the Target Host : ")
-port = int(input("Enter the Target port : "))
-print('\n')
+host = None
+port = None
 
 # Checking whether the target host is alive or dead
 def CheckTarget():
@@ -38,6 +33,12 @@ def CheckTarget():
 
 # Main Method
 def Main():
+    Banner()
+    global host
+    host = input("Enter the Target Host : ")
+    global port
+    port = int(input("Enter the Target port : "))
+    print('')
     print("Starting WAVES \n")
     print("Checking whether the Target is reachable \n")
     # calling CheckTarget method
@@ -49,8 +50,27 @@ def Main():
         print("The Host is Unreachable \n")
         exit()
 
-#calling main methods
-Main()
+Func = {
+    1: DefaultPort,
+    2: Customrange,
+}
+
+def nmaprec(host,port):
+
+    Choice = 1
+    while True:
+        print("1. Scan Default Ports (22-443)")
+        print("2. Enter Custom Range")
+        print("3. Back to Main Menu")
+        print('')
+        Choice = int(input(">> "))
+        if (Choice >= 0) and (Choice < 3):
+            Func[Choice](host, port)
+        elif Choice == 3:
+            Menu()
+        else:
+            print("Please choose an Appropriate option")
+
 
 Functions = {
  1: ReverseIP,
@@ -61,30 +81,36 @@ Functions = {
  6: Cors,
  7: HostHeader,
  8: CMSdetect,
- 9: Nmap_Recon
+ 9: nmaprec
 }
 
-Selection = 1
-while True:
-    print('\n')
-    print("1. ReverseIP")
-    print("2. SubDomain")
-    print("3. nsLookup")
-    print("4. ClickJacking")
-    print("5. OpenRedirect")
-    print("6. CORS")
-    print("7. Host Header Injection")
-    print('8. CMS Detection')
-    print("9. Nmap Port Scan")
-    print("10. Quit")
-    print('\n')
-    Selection = int(input("Choose an option: "))
-    print('\n')
-    if (Selection >= 0) and (Selection < 10):
-        Functions[Selection](host, port)
-    elif Selection == 10:
-        exit()
-    else:
-        print("Please choose an Appropriate option")
+def Menu():
+    Selection = 1
+    while True:
+        print('')
+        print("1. ReverseIP")
+        print("2. SubDomain")
+        print("3. nsLookup")
+        print("4. ClickJacking")
+        print("5. OpenRedirect")
+        print("6. CORS")
+        print("7. Host Header Injection")
+        print('8. CMS Detection')
+        print("9. Nmap Port Scan")
+        print("10. Quit")
+        print('')
+        Selection = int(input(">> "))
+        print('')
+        if (Selection >= 0) and (Selection < 10):
+            Functions[Selection](host, port)
+        elif Selection == 10:
+            exit()
+        else:
+            print("Please choose an Appropriate option")
 
 
+
+#calling main methods
+if __name__ == "__main__":
+    Main()
+    Menu()
