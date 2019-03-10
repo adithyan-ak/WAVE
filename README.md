@@ -11,3 +11,9 @@ WAVE is a Web Application Pentester
 ### Prerequisites
 
 What things you need to install the software and how to install them
+
+### Installing
+
+
+
+```pip3 install requirements.txt```
