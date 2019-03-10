@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.python.org/" rel="nofollow"><img src="https://camo.githubusercontent.com/2f5cb6367f686ffcd11747ed204bd9fe193d624c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f707974686f6e2d332e362532302532422d677265656e2e737667" alt="Python 3.6" data-cnonical-src="https://img.shields.io/badge/python-3.6%20%2B-green.svg" style="max-width:100%;"></a>
+  <a href="https://www.python.org/" rel="nofollow"><img src="https://img.shields.io/badge/python-3.6%20%2B-green.svg" style="max-width:100%;"></a>
     <a href="https://img.shields.io/badge/status-stable-brightgreen.svg" style="max-width:100%;">
   </a>
   <a href="https://travis-ci.com/adithyan-ak/wave" rel="nofollow">
