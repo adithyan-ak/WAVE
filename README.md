@@ -10,7 +10,7 @@ WAVE is a Web Application Pentester
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Python 3.x
 
 ### Installing
 
