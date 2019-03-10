@@ -14,8 +14,23 @@ Python 3.x
 
 ### Installing
 
+1. Open terminal and type
+
+```
+git clone https://github.com/adithyan-ak/WAVE
+```
+
+```
+cd WAVE
+```
+
 To install the required Python modules
 
 ```
 pip3 install -r requirements.txt
+```
+To run WAVE
+
+```
+python3 waves.py
 ```
