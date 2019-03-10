@@ -14,6 +14,6 @@ What things you need to install the software and how to install them
 
 ### Installing
 
+To install the required Python modules
 
-
-```pip3 install requirements.txt```
+    ```pip3 install requirements.txt```
