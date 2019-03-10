@@ -34,3 +34,5 @@ To run WAVE
 ```
 python3 waves.py
 ```
+<p align="center">
+  <a href="https://github.com/adithyan-ak/WAVE" rel="nofollow"><img src="https://i.imgur.com/yyGPEB5.png" style="max-width:100%;"></a>
