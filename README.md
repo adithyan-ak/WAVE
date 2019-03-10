@@ -14,7 +14,7 @@ Python 3.x
 
 ### Installing
 
-1. Open terminal and type
+Open terminal and type
 
 ```
 git clone https://github.com/adithyan-ak/WAVE
