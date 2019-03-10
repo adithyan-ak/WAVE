@@ -6,7 +6,7 @@
 
 # Web Application Vulnerability Exploiter (WAVE) 
 
-WAVE is a Web Application Pentester 
+WAVE is a Web Application Pentester with modules for Vulnerability Scanning and Reconnaisance.
 
 ### Prerequisites
 
