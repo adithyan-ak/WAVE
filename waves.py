@@ -8,6 +8,7 @@ from Vulnerabilities.clickjacking import ClickJacking
 from Vulnerabilities.hostheader import HostHeader
 from Vulnerabilities.cors import Cors
 from Vulnerabilities.openredirect import OpenRedirect
+from Vulnerabilities.bruteforce import ssh,ftp
 def Banner():
     print('''
 dP   dP   dP  .d888888  dP     dP  88888888b 
@@ -19,6 +20,7 @@ dP   dP   dP  .d888888  dP     dP  88888888b
 
 host = None
 port = None
+
 
 # Checking whether the target host is alive or dead
 def CheckTarget():
@@ -50,7 +52,7 @@ def Main():
         print("The Host is Unreachable \n")
         exit()
 
-Func = {
+NmapFunctions = {
     1: DefaultPort,
     2: Customrange,
 }
@@ -65,14 +67,37 @@ def nmaprec(host,port):
         print('')
         Choice = int(input(">> "))
         if (Choice >= 0) and (Choice < 3):
-            Func[Choice](host, port)
+            NmapFunctions[Choice](host, port)
         elif Choice == 3:
             Menu()
         else:
             print("Please choose an Appropriate option")
 
+BruteFunctions = {
+        1: ssh,
+        2: ftp
+    }
 
-Functions = {
+def BruteForce(host, port):
+    Selection = 1
+    while True:
+        print('')
+        print("1. SSH")
+        print("2. FTP")
+        print("3. Main Menu")
+        print('')
+        Selection = int(input(">> "))
+        print('')
+        if (Selection >= 0) and (Selection < 3):
+            BruteFunctions[Selection](host, port)
+        elif Selection == 3:
+            Menu()
+        else:
+            print("Please choose an Appropriate option")
+
+
+
+MainFunctions = {
  1: ReverseIP,
  2: SubDomain,
  3: nsLookup,
@@ -81,7 +106,8 @@ Functions = {
  6: Cors,
  7: HostHeader,
  8: CMSdetect,
- 9: nmaprec
+ 9: nmaprec,
+10: BruteForce
 }
 
 def Menu():
@@ -97,13 +123,14 @@ def Menu():
         print("7. Host Header Injection")
         print('8. CMS Detection')
         print("9. Nmap Port Scan")
-        print("10. Quit")
+        print("10. BruteForce")
+        print("11. Exit")
         print('')
         Selection = int(input(">> "))
         print('')
-        if (Selection >= 0) and (Selection < 10):
-            Functions[Selection](host, port)
-        elif Selection == 10:
+        if (Selection >= 0) and (Selection < 11):
+            MainFunctions[Selection](host, port)
+        elif Selection == 11:
             exit()
         else:
             print("Please choose an Appropriate option")

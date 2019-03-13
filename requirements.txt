@@ -1,4 +1,6 @@
 python-nmap
 requests
 urllib3
+paramiko
 wget
+cryptography==2.4.2

@@ -8,5 +8,5 @@ def ReverseIP(host, port):
         result = get(lookup).text
         print(result)
     except:
-        print('%s Invalid IP address' % bad)
+        print('Invalid IP address')
 
