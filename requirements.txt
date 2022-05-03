@@ -3,4 +3,4 @@ requests
 urllib3
 paramiko
 wget
-cryptography==2.4.2
+cryptography==3.3.2
