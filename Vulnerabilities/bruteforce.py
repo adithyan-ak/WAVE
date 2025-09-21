@@ -64,7 +64,7 @@ def ssh(host, port):
         except socket.error as e:
             print("Error : %s" %e)
 
-    elif choice == 1 | choice!= 2:
+    elif choice == 1 or choice != 2:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(10)
         try:
@@ -123,9 +123,6 @@ def ssh(host, port):
             print("Error : %s" % e)
 
 
-
-
-
 def ftp(host, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     port = 21
@@ -153,7 +150,7 @@ def ftp(host, port):
                 ftp = FTP(host)
                 print("Checking with Username : %s , Password : %s" % (username, password))
                 try:
-                    ftp.login(user='username', passwd='password')
+                    ftp.login(user=username, passwd=password)
                     flag = 0
                     pass
 
@@ -182,5 +179,3 @@ def ftp(host, port):
 
     except socket.error as e:
         print("Error : %s" % e)
-
-
