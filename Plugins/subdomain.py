@@ -3,6 +3,21 @@ import json
 import requests
 import socket
 
+# Define a whitelist of allowed domains to prevent SSRF
+ALLOWED_DOMAINS = [
+    'example.com',
+    'trusted.com',
+    'virustotal.com'
+]
+
+def is_allowed_domain(host):
+    # Check if the host ends with any of the allowed domains
+    host = host.lower().strip()
+    for domain in ALLOWED_DOMAINS:
+        if host == domain or host.endswith('.' + domain):
+            return True
+    return False
+
 
 def SubDomain(host, port):
 
@@ -12,6 +27,10 @@ def SubDomain(host, port):
         resolved_ip = socket.gethostbyname(host)
     except socket.gaierror:
         raise ValueError(f"Invalid host provided: {host}")
+
+    # Enforce whitelist check to mitigate SSRF
+    if not is_allowed_domain(host):
+        raise ValueError(f"Host not allowed: {host}")
 
     url = 'https://www.virustotal.com/vtapi/v2/domain/report'
 
