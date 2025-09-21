@@ -1,9 +1,17 @@
 
 import json
 import requests
+import socket
 
 
 def SubDomain(host, port):
+
+    # Validate that host is a valid domain name or IP address
+    try:
+        # Attempt to resolve the host to an IP address to ensure validity
+        resolved_ip = socket.gethostbyname(host)
+    except socket.gaierror:
+        raise ValueError(f"Invalid host provided: {host}")
 
     url = 'https://www.virustotal.com/vtapi/v2/domain/report'
 
@@ -13,6 +21,6 @@ def SubDomain(host, port):
 
     subdomains = response.json()
 
-    for x in subdomains['domain_siblings']:
+    for x in subdomains.get('domain_siblings', []):
         print(x)
 
