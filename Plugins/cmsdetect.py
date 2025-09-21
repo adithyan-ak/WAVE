@@ -7,14 +7,32 @@ def CMSdetect(domain, port):
         raise ValueError('API key for WhatCMS not found in environment variable WHATCMS_API_KEY')
     payload = {'key': api_key, 'url': domain}
     cms_url = "https://whatcms.org/APIEndpoint/Detect"
-    response = requests.get(cms_url, params=payload)
-    cms_data = response.json()
-    cms_info = cms_data['result']
-    if cms_info['code'] == 200:
-        print('Detected CMS     : %s' % cms_info['name'])
-        print('Detected Version : %s' % cms_info['version'])
-        print('Confidence       : %s' % cms_info['confidence'])
+    try:
+        response = requests.get(cms_url, params=payload, timeout=10)
+        response.raise_for_status()
+        cms_data = response.json()
+    except (requests.RequestException, ValueError) as e:
+        print(f"Error fetching or parsing CMS data: {e}")
+        return
+    if not isinstance(cms_data, dict):
+        print("Unexpected API response format: root element is not a dictionary.")
+        return
+    cms_info = cms_data.get('result')
+    if not isinstance(cms_info, dict):
+        print("Unexpected API response format: 'result' key missing or not a dictionary.")
+        return
+    code = cms_info.get('code')
+    if code == 200:
+        name = cms_info.get('name', 'N/A')
+        version = cms_info.get('version', 'N/A')
+        confidence = cms_info.get('confidence', 'N/A')
+        print('Detected CMS     : %s' % name)
+        print('Detected Version : %s' % version)
+        print('Confidence       : %s' % confidence)
     else:
-        print(cms_info['msg'])
-        print('Detected CMS : %s' % cms_info['name'])
-        print('Detected Version : %s' % cms_info['version'])
+        msg = cms_info.get('msg', 'No message provided')
+        name = cms_info.get('name', 'N/A')
+        version = cms_info.get('version', 'N/A')
+        print(msg)
+        print('Detected CMS : %s' % name)
+        print('Detected Version : %s' % version)
