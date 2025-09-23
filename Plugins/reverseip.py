@@ -2,6 +2,7 @@
 from requests import get
 import re
 from urllib.parse import urljoin, quote
+import logging
 
 
 def ReverseIP(host, port):
@@ -33,5 +34,6 @@ def ReverseIP(host, port):
     try:
         result = get(lookup).text
         print(result)
-    except Exception:
+    except (requests.exceptions.RequestException, ValueError) as e:
+        logging.error(f'Error fetching data from API: {e}')
         print('Error fetching data from API')
