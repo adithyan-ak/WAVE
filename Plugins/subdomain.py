@@ -2,6 +2,7 @@
 import json
 import requests
 import socket
+import os
 
 # Define a whitelist of allowed domains to prevent SSRF
 ALLOWED_DOMAINS = [
@@ -34,7 +35,11 @@ def SubDomain(host, port):
 
     url = 'https://www.virustotal.com/vtapi/v2/domain/report'
 
-    params = {'apikey':'1af37bfeb7b1628ba10695fb187987a6651793e37df006a5cdf8786b0e4f6453','domain':host}
+    api_key = os.getenv('VT_API_KEY')
+    if not api_key:
+        raise ValueError('VirusTotal API key not found in environment variable VT_API_KEY')
+
+    params = {'apikey': api_key, 'domain': host}
 
     response = requests.get(url, params=params)
 
