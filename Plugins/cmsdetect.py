@@ -5,6 +5,9 @@ def CMSdetect(domain, port):
     api_key = os.getenv('WHATCMS_API_KEY')
     if not api_key:
         raise ValueError('API key for WhatCMS not found in environment variable WHATCMS_API_KEY')
+    # Additional check to ensure the API key is not empty or whitespace
+    if not api_key.strip():
+        raise ValueError('API key for WhatCMS is empty or invalid')
     payload = {'key': api_key, 'url': domain}
     cms_url = "https://whatcms.org/APIEndpoint/Detect"
     try:
