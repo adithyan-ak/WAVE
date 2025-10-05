@@ -1,5 +1,5 @@
-from urllib.request import urlopen
 from urllib.parse import urlparse
+import requests
 
 # Define whitelist of allowed hosts and ports
 ALLOWED_HOSTS = {"example.com", "www.example.com"}
@@ -19,25 +19,27 @@ def ClickJacking(host, port):
 
     # Determine scheme based on port
     if port == 80:
-        scheme = 'http://'
+        scheme = 'http'
     elif port == 443:
-        scheme = 'https://'
+        scheme = 'https'
     else:
         # Should not reach here due to whitelist, but keep for safety
         print("Couldn't fetch data for the given PORT")
         return
 
-    url = scheme + host
+    # Construct URL safely
+    url = f"{scheme}://{host}"
 
-    # Further parse and validate URL
+    # Parse and validate URL
     parsed_url = urlparse(url)
-    if not parsed_url.scheme or not parsed_url.netloc:
-        print("Invalid URL constructed")
+    if parsed_url.scheme not in ('http', 'https') or parsed_url.hostname not in ALLOWED_HOSTS:
+        print("Invalid or disallowed URL constructed")
         return
 
     try:
-        data = urlopen(url)
-        headers = data.info()
+        # Use requests with timeout and no redirects to mitigate SSRF risks
+        response = requests.get(url, timeout=5, allow_redirects=False)
+        headers = response.headers
     except Exception as e:
         print(f"Error fetching URL: {e}")
         return
